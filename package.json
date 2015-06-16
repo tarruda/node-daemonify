@@ -4,11 +4,12 @@
   "description": "Build memory-persistent command-line utilities that start very fast.",
   "main": "daemon.js",
   "bin": {
-    "daemonify": "install-daemonify.js"
+    "daemonify": "bin/daemonify"
   },
   "scripts": {
     "test": "make test",
-    "prepublish": "[ -r ~/.global.npmignore ] && cat ~/.global.npmignore > .npmignore || true"
+    "prepublish": "[ -r ~/.global.npmignore ] && cat ~/.global.npmignore > .npmignore || true",
+    "postinstall": "cp build/Release/daemonify bin/daemonify"
   },
   "repository": {
     "type": "git",
