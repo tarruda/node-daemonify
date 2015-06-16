@@ -1,0 +1,64 @@
+# Each entry in this yaml list represents a single test. "argv" is the argument
+# vector passed to the  daemonify proxy, "status" is the expected return code and
+# "io" describes the interactions between the test runner and the proxy:
+#
+# - "stdin" sends data to the proxy. "null" means EOF and will close stdin.
+# - "stdout" and "stderr" describes data expectations from the proxy's
+#    stdout and stderr respectively. The match buffer is then emptied, so future
+#    calls to stdout/stderr will only match new data. 
+
+
+- title: exit module
+  argv: [exit]
+  status: 0
+  io:
+    - stdout: "exit\n"
+
+- title: error module
+  argv: [error]
+  status: 1
+  io:
+    - stderr: "error\n"
+
+- title: echo module exit
+  argv: [echo]
+  status: 0
+  io:
+    - stdin: "hey\n"
+    - stdout: "echo: hey\n"
+    - stdin: "ho\n"
+    - stdout: "echo: ho\n"
+    - stdin: "let's go!\n"
+    - stdout: "echo: let's go!\n"
+    - stdin: "exit\n"
+    - stdout: "exit\n"
+
+- title: echo module error
+  argv: [echo]
+  status: 1
+  io:
+    - stdin: "hey\n"
+    - stdout: "echo: hey\n"
+    - stdin: "error\n"
+    - stderr: "error\n"
+
+- title: echo module close stdin
+  argv: [echo]
+  status: 0
+  io:
+    - stdin: "hey\n"
+    - stdout: "echo: hey\n"
+    - stdin: null
+    - stdout: "stdin closed!\n"
+
+- title: from .daemonify subdirectory
+  argv: [daemon]
+  status: 0
+  io:
+    - stdout: "from .daemonify subdirectory\n"
+
+- title: args
+  argv: [prog, -O1, --opt2, arg1, arg2]
+  status: 0
+  io:
+    - stdout: "argv: [ 'prog', '-O1', '--opt2', 'arg1', 'arg2' ]\n"

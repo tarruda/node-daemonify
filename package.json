@@ -1,0 +1,48 @@
+{
+  "name": "daemonify",
+  "version": "0.1.0",
+  "description": "Build memory-persistent command-line utilities that start very fast.",
+  "main": "daemon.js",
+  "bin": {
+    "daemonify": "install-daemonify.js"
+  },
+  "scripts": {
+    "test": "make test",
+    "prepublish": "[ -r ~/.global.npmignore ] && cat ~/.global.npmignore > .npmignore || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tarruda/node-daemonify.git"
+  },
+  "author": "Thiago de Arruda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tarruda/node-daemonify/issues"
+  },
+  "homepage": "https://github.com/tarruda/node-daemonify#readme",
+  "keywords": [
+    "daemonify",
+    "cli",
+    "speed",
+    "daemon",
+    "run",
+    "build-tool",
+    "build-system",
+    "make"
+  ],
+  "dependencies": {
+    "bl": "^0.9.4",
+    "has": "^1.0.0",
+    "msgpack5": "^2.3.0",
+    "readable-stream": "^2.0.0"
+  },
+  "devDependencies": {
+    "bluebird": "^2.9.27",
+    "glob": "^5.0.10",
+    "js-yaml": "^3.3.1",
+    "node-gyp": "^2.0.1",
+    "split": "^1.0.0",
+    "tape": "^4.0.0",
+    "through2": "^0.6.5"
+  }
+}
